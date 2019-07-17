@@ -1,24 +1,23 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Logo from './logo'
+import Desc from './desc'
+import BoardButton from './board_button'
 
 const App: React.FC = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="App-header">
+        <div className="logo-container">
+          <Logo />
+        </div>
+        <div className="desc-container">
+          <Desc />
+        </div>
+        <div>
+          <BoardButton title="Save Board" />
+        </div>
+      </div>
     </div>
   );
 }
