@@ -1,0 +1,11 @@
+.songcard {
+  background-color: #1995AD;
+  display: inline-block;
+}
+
+.song-container {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+

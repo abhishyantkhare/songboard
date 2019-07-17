@@ -1,0 +1,15 @@
+.title {
+  color: #1995AD;
+  font-size: 24px;
+  width: auto;
+  display: inline-block;
+  text-align: center
+}
+
+.underline {
+  background-color: #FF78C9;
+  height: 2px;
+  padding-left: 60px;
+  padding-right: 60px;
+  margin-top: 1vh;
+}

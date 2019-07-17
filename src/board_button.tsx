@@ -9,7 +9,7 @@ class BoardButton extends React.Component<Props, {}> {
   render() {
     return (
       <div className="button">
-        {this.props.title}
+          {this.props.title}
       </div>
     )
   }

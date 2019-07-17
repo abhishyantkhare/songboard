@@ -1,6 +1,7 @@
 .App {
+  display: flex;
+  flex-direction: row;
 }
-
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
@@ -19,6 +20,51 @@
 
 .desc-container {
   margin-top: 3vh;
+}
+
+.save-button-container {
+  margin-top: 10vh;
+}
+
+.new-button-container {
+  margin-top: 3vh;
+}
+
+.my-boards-container {
+  margin-top: 5vh;
+}
+
+.board-view {
+  display: flex;
+  flex-direction: column;
+  margin-left: 5vw;
+  margin-top: 8vh
+}
+
+.songs-container {
+  width: 53vw;
+  height: 50vh;
+  margin-top: 5vh;
+  overflow: scroll;
+}
+
+.add-container {
+  margin-top: 5vh
+}
+
+.add-song {
+  margin-top: 1vh;
+  width: 40vw;
+  display: flex;
+  flex-direction: row
+}
+.add-text {
+  width: 30vw;
+}
+
+.add-button {
+  color: white;
+  margin-left: 1vw;
 }
 
 .App-link {
