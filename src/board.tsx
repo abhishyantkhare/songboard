@@ -15,6 +15,10 @@ const DUMMY_LINKS = [
     urlType: URLTYPE.SPOTIFY
   },
   {
+    url: "https://open.spotify.com/embed/track/5ry2OE6R2zPQFDO85XkgRb",
+    urlType: URLTYPE.SPOTIFY
+  },
+  {
     url: "https://www.youtube.com/embed/miJAfs7jhak",
     urlType: URLTYPE.YOUTUBE
   },
