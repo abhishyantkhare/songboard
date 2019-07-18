@@ -7,7 +7,7 @@ import SectionHeader from './section_header'
 import TextField from '@material-ui/core/TextField'
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
-import SongCard from './songcard'
+import Board from './board'
 
 const App: React.FC = () => {
   return (
@@ -34,7 +34,7 @@ const App: React.FC = () => {
           <SectionHeader title="Board Name" />
         </div>
         <div className="songs-container">
-          <SongCard url=""/>
+          <Board />
         </div>
         <div className="add-container"> 
           <SectionHeader title="Add a Song" />

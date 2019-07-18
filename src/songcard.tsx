@@ -5,9 +5,11 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutline';
 import IconButton from '@material-ui/core/IconButton';
+import SongFrame from './songframe'
+import {Link} from './types'
 
 type Props = {
-  url: string
+  songlink: Link 
 }
 
 class SongCard extends React.Component<Props, {}> {
@@ -15,14 +17,7 @@ class SongCard extends React.Component<Props, {}> {
     return(
       <div className="song-container">
         <div className="songcard">
-          <iframe 
-          src="https://open.spotify.com/embed/track/5JtPGzRgrWxkXX9LoROq3d"
-          width="300" 
-          height="80" 
-          frameBorder="0" 
-          allowTransparency={true}
-          allow="encrypted-media">
-          </iframe>
+          <SongFrame songlink={this.props.songlink} />
         </div>
         <IconButton aria-label="Delete" color="default">
           <DeleteOutlinedIcon/>
