@@ -9,32 +9,27 @@ type Props = {
 
 }
 
-const DUMMY_LINKS = [
-  {
-    url: "https://open.spotify.com/embed/track/5JtPGzRgrWxkXX9LoROq3d",
-    urlType: URLTYPE.SPOTIFY
-  },
-  {
-    url: "https://open.spotify.com/embed/track/5ry2OE6R2zPQFDO85XkgRb",
-    urlType: URLTYPE.SPOTIFY
-  },
-  {
-    url: "https://www.youtube.com/embed/miJAfs7jhak",
-    urlType: URLTYPE.YOUTUBE
-  },
-  {
-    url: "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/591147435&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true",
-    urlType: URLTYPE.SOUNDCLOUD
-  }
-]
 
 
 class Board extends React.Component<Props, State> {
   constructor(props:Props) {
     super(props);
     this.state = {
-      links: DUMMY_LINKS 
+      links: []
     }
+  }
+
+  componentDidMount() {
+    console.log(process.env.REACT_APP_BACKEND_URL)
+    fetch(process.env.REACT_APP_BACKEND_URL + "/songs")
+    .then(function(response){
+      return response.json()
+    })
+    .then(songJson => {
+      this.setState({
+        links: songJson
+      })
+    })
   }
 
   mapLinks() : JSX.Element[]{
