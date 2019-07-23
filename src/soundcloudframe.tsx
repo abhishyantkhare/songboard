@@ -1,5 +1,20 @@
 import React from 'react'
 
+
+/*
+Contract
+require:
+  * url is a valid Soundcloud URL
+ensure:
+  * returns an iframe with the following properties:
+   *width="100%" 
+   *height="166" 
+   *scrolling="no" 
+   *frameBorder="no" 
+   *allow="autoplay" 
+*/
+
+
 type Props = {
   url: string
 }

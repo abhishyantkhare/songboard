@@ -4,6 +4,19 @@ import SpotifyFrame from './spotifyframe'
 import YoutubeFrame from './youtubeframe'
 import SoundcloudFrame from './soundcloudframe'
 
+
+/*
+Contract
+require:
+  * a songLink of type Link with a valid url and a type of URLTYPE 
+ensure:
+  * Returns the correct frame for the type of url passed in
+    * URLTYPE.SPOTIFY - SpotifyFrame
+    * URLTYPE.YOUTUBE - YoutubeFrame
+    * URLTYPE.SOUNDCLOUD - SoundcloudFrame
+*/
+
+
 type Props = {
   songlink: Link
 }
