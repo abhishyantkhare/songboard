@@ -1,12 +1,19 @@
 import React from 'react'
 import './songcard.css'
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutline';
 import IconButton from '@material-ui/core/IconButton';
 import SongFrame from './songframe'
 import {Link} from './types'
+
+/*
+Contract
+  * requires:
+    * a valid songlink of type Link
+  * ensures:
+    * loads a SongFrame that has the songlink as the prop
+    * loads a delete button div with a delete button in it
+    * sends a DELETE request to the backend when the delete button is clicked
+*/
 
 type Props = {
   songlink: Link 
