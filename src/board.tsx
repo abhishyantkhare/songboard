@@ -2,6 +2,17 @@ import React from 'react'
 import {URLTYPE, Link} from './types'
 import SongCard from './songcard'
 
+/*
+Contract
+  * requires
+  * ensures
+    * retrieves the stored links for the current board
+    * displays stored links in a responsive fashion
+    * handles deleting logic for links
+    * handles adding already validated links to the board and to the backend
+      does not validate links
+*/
+
 type State = {
   links: Link[]
 }
@@ -30,6 +41,10 @@ class Board extends React.Component<Props, State> {
         links: songJson
       })
     })
+  }
+
+  getLinks() : Link[]{
+    return this.state.links
   }
 
   mapLinks() : JSX.Element[]{

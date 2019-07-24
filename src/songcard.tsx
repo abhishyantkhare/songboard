@@ -12,7 +12,7 @@ Contract
   * ensures:
     * loads a SongFrame that has the songlink as the prop
     * loads a delete button div with a delete button in it
-    * sends a DELETE request to the backend when the delete button is clicked
+    * calls props delete fn on click of delete button 
 */
 
 type Props = {
@@ -20,6 +20,11 @@ type Props = {
 }
 
 class SongCard extends React.Component<Props, {}> {
+
+  getURL():string {
+    return this.props.songlink.url;
+  }
+
   render() {
     return(
       <div className="song-container">

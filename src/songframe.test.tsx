@@ -13,7 +13,7 @@ describe("<SongFrame />", () => {
       urlType: URLTYPE.SPOTIFY
     }
     const wrapper = shallow(<SongFrame songlink={link} />)
-    expect(wrapper.find(<SpotifyFrame />))
+    expect(wrapper.containsMatchingElement(<SpotifyFrame />)).toBe(true);
   });
   it("loads a YoutubeFrame for a Youtube URL", () => {
     const link:Link = {
@@ -21,7 +21,7 @@ describe("<SongFrame />", () => {
       urlType: URLTYPE.YOUTUBE
     }
     const wrapper = shallow(<SongFrame songlink={link} />)
-    expect(wrapper.find(<YoutubeFrame />))
+    expect(wrapper.containsMatchingElement(<YoutubeFrame />)).toBe(true);
   });
   it("loads a SoundcloudFrame for a Soundcloud URL", () => {
     const link:Link = {
@@ -29,6 +29,6 @@ describe("<SongFrame />", () => {
       urlType: URLTYPE.SOUNDCLOUD
     }
     const wrapper = shallow(<SongFrame songlink={link} />)
-    expect(wrapper.find(<SoundcloudFrame />))
+    expect(wrapper.containsMatchingElement(<SoundcloudFrame />)).toBe(true);
   });
 })

@@ -10,11 +10,26 @@ describe('<SongCard />', () => {
       url: "test.url",
       urlType: URLTYPE.SOUNDCLOUD
     }
-    const wrapper = shallow(<SongCard songlink={link}/>)
-    expect(wrapper.find(<SongFrame songlink={link} />))
+    const wrapper = shallow(<SongCard songlink={link}/>);
+    expect(wrapper.find(SongFrame).exists()).toBeTruthy();
   });
   it('loads a delete button div', () => {
-    const wrapper = shallow(<SongCard />)
-    expect(wrapper.find(".delete_button"))
+    const link:Link = {
+      url: "test.url",
+      urlType: URLTYPE.SOUNDCLOUD
+    }
+    const wrapper = shallow(<SongCard songlink={link}/>)
+    expect(wrapper.find("#delete_button").exists()).toBeTruthy();
+  });
+  it('calls given onclick fn to delete', () => {
+    const onDeleteClick = jest.fn().mockName('onDeleteClick')    
+    //ADD ARGUMENT CHECK
+    const link:Link = {
+      url: "test.url",
+      urlType: URLTYPE.SOUNDCLOUD
+    }
+    const wrapper = shallow(<SongCard songlink={link} onDeleteClick={onDeleteClick}/>)
+    wrapper.find("#delete_button").simulate('click')
+    expect(onDeleteClick).toHaveBeenCalled();
   })
 })
