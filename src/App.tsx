@@ -4,9 +4,6 @@ import Logo from './logo'
 import Desc from './desc'
 import BoardButton from './board_button'
 import SectionHeader from './section_header'
-import TextField from '@material-ui/core/TextField'
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
 import Board from './board'
 
 const App: React.FC = () => {
@@ -30,31 +27,7 @@ const App: React.FC = () => {
         </div>
       </div>
       <div className="board-view">
-        <div>
-          <SectionHeader title="Board Name" />
-        </div>
-        <div className="songs-container">
-          <Board />
-        </div>
-        <div className="add-container"> 
-          <SectionHeader title="Add a Song" />
-        </div>
-        <div className="add-song">
-          <div className="add-text">
-            <TextField 
-            fullWidth={true}
-            />
-          </div>
-          <div className="add-button">
-            <Fab 
-            color="primary"
-            aria-label="Add" 
-            size="small"
-            >
-              <AddIcon />
-            </Fab>
-          </div>
-        </div>
+        <Board />
       </div>
     </div>
   );

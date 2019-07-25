@@ -21,8 +21,8 @@ type Props = {
 
 class SongCard extends React.Component<Props, {}> {
 
-  getURL():string {
-    return this.props.songlink.url;
+  getLink():Link {
+    return this.props.songlink;
   }
 
   render() {

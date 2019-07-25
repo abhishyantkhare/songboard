@@ -1,6 +1,8 @@
 import React from 'react'
 import {URLTYPE, Link} from './types'
 import SongCard from './songcard'
+import AddSong from './add_song'
+import SectionHeader from './section_header'
 
 /*
 Contract
@@ -9,8 +11,7 @@ Contract
     * retrieves the stored links for the current board
     * displays stored links in a responsive fashion
     * handles deleting logic for links
-    * handles adding already validated links to the board and to the backend
-      does not validate links
+    * handles adding already validated links to the board 
 */
 
 type State = {
@@ -47,6 +48,10 @@ class Board extends React.Component<Props, State> {
     return this.state.links
   }
 
+  deleteLink(link:Link) {
+
+  }
+
   mapLinks() : JSX.Element[]{
     return this.state.links.map(
       link => (
@@ -60,7 +65,13 @@ class Board extends React.Component<Props, State> {
   render() {
     return(
       <div>
-        {this.mapLinks()}
+        <div>
+          <SectionHeader title="Board Name" />
+        </div>
+        <div className="songs-container">
+          {this.mapLinks()}
+        </div>
+        <AddSong />
       </div>
     )
   }
