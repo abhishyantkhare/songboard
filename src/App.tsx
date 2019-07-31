@@ -4,7 +4,7 @@ import Logo from './logo'
 import Desc from './desc'
 import BoardButton from './board_button'
 import SectionHeader from './section_header'
-import Board from './board'
+import BoardView from './board_view'
 
 const App: React.FC = () => {
   return (
@@ -27,7 +27,7 @@ const App: React.FC = () => {
         </div>
       </div>
       <div className="board-view">
-        <Board />
+        <BoardView board_id={"0"}/>
       </div>
     </div>
   );

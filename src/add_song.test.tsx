@@ -17,6 +17,7 @@ describe('<AddSong />', () => {
     const valid_soundcloud_url:string = "https://soundcloud.com/lifeofdesiigner/desiigner-panda" 
     const valid_youtube_url:string = "https://www.youtube.com/watch?v=Jg5wkZ-dJXA"
     const invalid_spotify_url:string = "https://open.spotify.com/track/2374M0fQpWi3dLnB54qaL?si=qh4n4skbTFK1nUyEQobiIQ";
-
-  })
+    expect(false).toBe(true);
+  });
+  
 })

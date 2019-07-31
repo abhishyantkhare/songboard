@@ -3,6 +3,7 @@ import {URLTYPE, Link} from './types'
 import SongCard from './songcard'
 import AddSong from './add_song'
 import SectionHeader from './section_header'
+import API from './api'
 
 /*
 Contract
@@ -17,29 +18,27 @@ Contract
 type State = {
   links: Link[]
 }
-type Props = {
-
+type BoardViewProps = {
+  board_id:string
 }
 
 
 
-class Board extends React.Component<Props, State> {
-  constructor(props:Props) {
+class BoardView extends React.Component<BoardViewProps, State> {
+  constructor(props:BoardViewProps) {
     super(props);
     this.state = {
       links: []
     }
+    this.mapLinks = this.mapLinks.bind(this);
   }
 
   componentDidMount() {
-    console.log(process.env.REACT_APP_BACKEND_URL)
-    fetch(process.env.REACT_APP_BACKEND_URL + "/songs")
-    .then(function(response){
-      return response.json()
-    })
-    .then(songJson => {
+    API.getBoardLinks(this.props.board_id, "")
+    .then(links => {
+      console.log(links)
       this.setState({
-        links: songJson
+        links: links
       })
     })
   }
@@ -52,7 +51,12 @@ class Board extends React.Component<Props, State> {
 
   }
 
+  addLink(link:Link) {
+    
+  }
+
   mapLinks() : JSX.Element[]{
+    console.log(this.state.links)
     return this.state.links.map(
       link => (
         <SongCard 
@@ -78,4 +82,4 @@ class Board extends React.Component<Props, State> {
 
 }
 
-export default Board;
+export default BoardView;
