@@ -1,5 +1,5 @@
 import React from 'react'
-import {URLTYPE, Link} from './types'
+import { URLTYPE, Link } from './types'
 import SongCard from './songcard'
 import AddSong from './add_song'
 import SectionHeader from './section_header'
@@ -19,55 +19,62 @@ type State = {
   links: Link[]
 }
 type BoardViewProps = {
-  board_id:string
+  board_id: string
 }
 
 
 
 class BoardView extends React.Component<BoardViewProps, State> {
-  constructor(props:BoardViewProps) {
+  constructor(props: BoardViewProps) {
     super(props);
     this.state = {
       links: []
     }
     this.mapLinks = this.mapLinks.bind(this);
+    this.loadLinks = this.loadLinks.bind(this);
   }
 
   componentDidMount() {
-    API.getBoardLinks(this.props.board_id, "")
-    .then(links => {
-      console.log(links)
-      this.setState({
-        links: links
-      })
-    })
+    this.loadLinks();
   }
 
-  getLinks() : Link[]{
+  loadLinks() {
+    API.getBoardLinks(this.props.board_id, "")
+      .then(links => {
+        this.setState({
+          links: links
+        })
+      })
+  }
+
+  getLinks(): Link[] {
     return this.state.links
   }
 
-  deleteLink(link:Link) {
+  deleteLink(link: Link) {
 
   }
 
-  addLink(link:Link) {
-    
+  addLink(link: Link) {
+    return API.addLinkToBoard(this.props.board_id, link, "")
+      .then(response => {
+        this.loadLinks();
+      })
   }
 
-  mapLinks() : JSX.Element[]{
+  mapLinks(): JSX.Element[] {
     console.log(this.state.links)
     return this.state.links.map(
       link => (
-        <SongCard 
-        songlink={link}
+        <SongCard
+          songlink={link}
         />
       )
     )
   }
 
   render() {
-    return(
+    return (
       <div>
         <div>
           <SectionHeader title="Board Name" />
@@ -75,7 +82,7 @@ class BoardView extends React.Component<BoardViewProps, State> {
         <div className="songs-container">
           {this.mapLinks()}
         </div>
-        <AddSong />
+        <AddSong onPlusClick={this.addLink}/>
       </div>
     )
   }

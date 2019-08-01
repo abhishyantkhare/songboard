@@ -13,7 +13,7 @@ export interface Board {
   links:Link[]
 }
 
-export interface POSTResponse extends Response{
+export type POSTResponse = {
   success:boolean,
   message:string
 }

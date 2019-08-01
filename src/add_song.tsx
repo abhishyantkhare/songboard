@@ -20,11 +20,11 @@ Contract
     *  
 */
 type AddSongProps = {
-
+  onPlusClick: (ev:React.MouseEvent<HTMLButtonElement>) => void
 };
 
 type AddSongState = {
-  url: string
+  url: string,
 }
 
 class AddSong extends Component<AddSongProps, AddSongState> {

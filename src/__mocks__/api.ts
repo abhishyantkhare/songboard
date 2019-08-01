@@ -1,4 +1,5 @@
-import { Link, POSTResponse, Board , URLTYPE} from './types'
+import { Link, POSTResponse, Board , URLTYPE} from '../types'
+import { resolve } from 'dns';
 
 
 var boards:Board[] = [
@@ -34,9 +35,9 @@ class API {
       *returns error if server has error
 
   */
-  static addLinkToBoard(board_id:string, link: Link, session_token: string): Promise<POSTResponse> {
+  static addLinkToBoard(board_id:number, link: Link, session_token: string): Promise<POSTResponse> {
     return new Promise(function(resolve, reject) {
-      var board = boards[parseInt(board_id)];
+      var board = boards[board_id];
       board.links.push(link)
       let response:POSTResponse = {
         success: true,
@@ -47,13 +48,13 @@ class API {
     
   }
 
-  static getBoard(board_id:string , session_token: string): Promise<Board> {
+  static getBoard(board_id:number , session_token: string): Promise<Board> {
     return new Promise(function(resolve,reject) {
-      resolve(boards[parseInt(board_id)])
+      resolve(boards[board_id])
     })
   }
 
-  static getBoardLinks(board_id:string, session_token: string): Promise<Link[]> {
+  static getBoardLinks(board_id: number, session_token: string): Promise<Link[]> {
     return new Promise(function (resolve, reject) {
       API.getBoard(board_id, session_token)
         .then(function (board) {
