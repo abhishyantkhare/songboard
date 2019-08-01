@@ -30,6 +30,7 @@ class BoardView extends React.Component<BoardViewProps, State> {
     this.state = {
       links: []
     }
+    this.addLink = this.addLink.bind(this);
     this.mapLinks = this.mapLinks.bind(this);
     this.loadLinks = this.loadLinks.bind(this);
   }
@@ -63,7 +64,6 @@ class BoardView extends React.Component<BoardViewProps, State> {
   }
 
   mapLinks(): JSX.Element[] {
-    console.log(this.state.links)
     return this.state.links.map(
       link => (
         <SongCard

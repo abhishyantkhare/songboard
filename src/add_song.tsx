@@ -4,6 +4,7 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import SectionHeader from './section_header';
 import './add_song.css';
+import {URLTYPE, Link} from './types'
 
 /*
 Contract
@@ -20,7 +21,7 @@ Contract
     *  
 */
 type AddSongProps = {
-  onPlusClick: (ev:React.MouseEvent<HTMLButtonElement>) => void
+  onPlusClick: (link:Link) => void
 };
 
 type AddSongState = {
@@ -34,6 +35,7 @@ class AddSong extends Component<AddSongProps, AddSongState> {
       url: ""
     }
     this.onTextChange = this.onTextChange.bind(this);
+    this.onPlusClick = this.onPlusClick.bind(this);
 
   }
 
@@ -41,11 +43,37 @@ class AddSong extends Component<AddSongProps, AddSongState> {
     return this.state.url;
   }
 
+  determineURLType(url:string):URLTYPE {
+    if(url.includes("spotify")){
+      return URLTYPE.SPOTIFY;
+    }
+    if(url.includes("soundcloud")){
+      return URLTYPE.SOUNDCLOUD;
+    }
+    if(url.includes("youtube")){
+      return URLTYPE.YOUTUBE
+    }
+    return URLTYPE.ERROR
+  }
+
+  onPlusClick() {
+    let urlType:URLTYPE = this.determineURLType(this.state.url)
+    console.log("REACHED");
+    if (urlType !== URLTYPE.ERROR) {
+      let link:Link = {
+        url: this.state.url,
+        urlType: urlType
+      }
+      this.props.onPlusClick(link);
+    }
+  }
+
   onTextChange(e:React.ChangeEvent<HTMLInputElement>) {
     this.setState({
       url: e.target.value
     })
   }
+
 
 
   render(){
@@ -61,7 +89,7 @@ class AddSong extends Component<AddSongProps, AddSongState> {
             onChange={this.onTextChange}
             />
           </div>
-          <div className="add-button">
+          <div className="add-button" id ="add-button" onClick={this.onPlusClick}>
             <Fab 
             color="primary"
             aria-label="Add" 

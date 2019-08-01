@@ -1,7 +1,8 @@
 export enum URLTYPE {
   SPOTIFY="SPOTIFY",
   SOUNDCLOUD="SOUNDCLOUD",
-  YOUTUBE="YOUTUBE"
+  YOUTUBE="YOUTUBE",
+  ERROR="ERROR"
 }
 
 export type Link = {

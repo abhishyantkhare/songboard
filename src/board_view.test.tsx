@@ -45,14 +45,6 @@ describe('<BoardView />' , () => {
     const wrapper = shallow(<BoardView board_id="0"/>);
     expect(wrapper.containsMatchingElement(<AddSong />)).toBe(true);
   });
-  it('makes sure addLink is clicked on plus click', () => {
-    const wrapper = shallow(<BoardView board_id="0"/>);
-    const addLinkSpy = jest.spyOn(BoardView, 'addLink');
-    const add_song = wrapper.find(AddSong);
-    const add_button = add_song.find("#add-song");
-    add_button.simulate('click');
-    expect(addLinkSpy).toHaveBeenCalled();
-  });
   it('adds song on add link call', () => {
     const link:Link = {
       url: "https://open.spotify.com/embed/track/5ry2OE6R2zPQFDO85XkgRb",
