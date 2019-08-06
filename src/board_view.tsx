@@ -81,6 +81,10 @@ class BoardView extends React.Component<BoardViewProps, State> {
         )
     });
   }
+  
+  saveBoard() : void{
+
+  }
 
   mapLinks(): JSX.Element[] {
     return this.state.links.map(
@@ -100,7 +104,10 @@ class BoardView extends React.Component<BoardViewProps, State> {
           <SectionHeader title="Board Name" />
         </div>
         <div>
-          <BoardControl />
+          <BoardControl 
+          newBoardFunc={this.makeNewBoard}
+          saveBoardFunc={this.saveBoard}
+          />
         </div>
         <div className="songs-container">
           {this.mapLinks()}

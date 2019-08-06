@@ -5,6 +5,7 @@ import {URLTYPE, Link} from './types'
 import SongCard from './songcard'
 import { TextField } from '@material-ui/core';
 import AddSong from './add_song'
+import BoardControl from './board_control'
 
 
 
@@ -64,8 +65,9 @@ describe('<BoardView />' , () => {
     
   });
   it('makes a new boad with empty links', () => {
-    const wrapper = shallow(<BoardView />)
+    const wrapper = shallow(<BoardView />);
     wrapper.instance().makeNewBoard();
     expect(wrapper.instance().links.length == 0).toBe(true);
-  })
+  });
+
 })

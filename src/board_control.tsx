@@ -4,7 +4,7 @@ import './board_control.css'
 
 type BoardControlProps = {
   saveBoardFunc: () => void,
-  newBoardFunc: () => void
+  newBoardFunc: (() => Promise<void>)
 }
 
 class BoardControl extends Component<BoardControlProps, {}> {
@@ -12,10 +12,10 @@ class BoardControl extends Component<BoardControlProps, {}> {
     return (
       <div className="button-container">
         <div className="save-button-container">
-          <BoardButton title="Save Board" />
+          <BoardButton title="Save Board" onClick={this.props.saveBoardFunc}/>
         </div>
-        <div className="new-button-container">
-          <BoardButton title="New Board" />
+        <div className="new-button-container" >
+          <BoardButton title="New Board" onClick={this.props.newBoardFunc}/>
         </div>
       </div>
     )
