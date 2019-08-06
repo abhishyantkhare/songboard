@@ -6,21 +6,20 @@ import SongCard from './songcard'
 import { TextField } from '@material-ui/core';
 import AddSong from './add_song'
 
-jest.mock('api')
 
 
 
 describe('<BoardView />' , () => {
   it('displays stored links', () => {
-    const wrapper = shallow(<BoardView board_id="0"/>);
-    const board_links:Link[] = wrapper.instance().getLinks();
+    const wrapper = shallow(<BoardView />);
+    const board_links:Link[] = wrapper.instance().links;
     board_links.forEach(link => {
       expect(wrapper.find(SongCard).findWhere(c => c.getLink() === link).exists()).toBe(true)
     })
   });
   it('calls the appropriate method for clicking delete', () => {
     const deleteLinkSpy = jest.spyOn(BoardView, 'deleteLink');
-    const wrapper = shallow(<BoardView board_id="0"/>);
+    const wrapper = shallow(<BoardView />);
     const link_0 = {
       url: "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/591147435&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true",
       urlType: URLTYPE.SOUNDCLOUD
@@ -32,7 +31,7 @@ describe('<BoardView />' , () => {
 
   })
   it('handles deleting logic for links', () => {
-    const wrapper = shallow(<BoardView board_id="0"/>);
+    const wrapper = shallow(<BoardView />);
     const link_0 = {
       url: "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/591147435&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true",
       urlType: URLTYPE.SOUNDCLOUD
@@ -42,7 +41,7 @@ describe('<BoardView />' , () => {
     expect(true).toBe(false);
   });
   it('has an AddSong component', () => {
-    const wrapper = shallow(<BoardView board_id="0"/>);
+    const wrapper = shallow(<BoardView />);
     expect(wrapper.containsMatchingElement(<AddSong />)).toBe(true);
   });
   it('adds song on add link call', () => {
@@ -50,10 +49,23 @@ describe('<BoardView />' , () => {
       url: "https://open.spotify.com/embed/track/5ry2OE6R2zPQFDO85XkgRb",
       urlType: URLTYPE.SPOTIFY
     };
-    const wrapper = shallow(<BoardView board_id="0"/>)
+    const wrapper = shallow(<BoardView />)
     return wrapper.instance().addLink(link)
     .then(() => {
-      expect(wrapper.instance().state.links.includes(link)).toBe(true)
+      expect(wrapper.instance().links.includes(link)).toBe(true)
     });
+  });
+  it('makes a new board with new id on new board method', () => {
+    const wrapper = shallow(<BoardView />)
+    const id = wrapper.instance().id;
+    return wrapper.instance().makeNewBoard().then(() => {
+      expect(wrapper.instance().id == id).toBe(false);
+    });
+    
+  });
+  it('makes a new boad with empty links', () => {
+    const wrapper = shallow(<BoardView />)
+    wrapper.instance().makeNewBoard();
+    expect(wrapper.instance().links.length == 0).toBe(true);
   })
 })

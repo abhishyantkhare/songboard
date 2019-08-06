@@ -1,9 +1,10 @@
 import React from 'react'
-import { URLTYPE, Link } from './types'
+import { Board, URLTYPE, Link } from './types'
 import SongCard from './songcard'
 import AddSong from './add_song'
 import SectionHeader from './section_header'
-import API from './api'
+import API from './__mocks__/api'
+import BoardControl from './board_control'
 
 /*
 Contract
@@ -16,10 +17,10 @@ Contract
 */
 
 type State = {
+  id: string,
   links: Link[]
 }
 type BoardViewProps = {
-  board_id: string
 }
 
 
@@ -28,11 +29,13 @@ class BoardView extends React.Component<BoardViewProps, State> {
   constructor(props: BoardViewProps) {
     super(props);
     this.state = {
+      id: "0",
       links: []
     }
     this.addLink = this.addLink.bind(this);
     this.mapLinks = this.mapLinks.bind(this);
     this.loadLinks = this.loadLinks.bind(this);
+    this.makeNewBoard = this.makeNewBoard.bind(this);
   }
 
   componentDidMount() {
@@ -40,16 +43,19 @@ class BoardView extends React.Component<BoardViewProps, State> {
   }
 
   loadLinks() {
-    API.getBoardLinks(this.props.board_id, "")
-      .then(links => {
+    API.getBoard(this.state.id, "")
+      .then(board => {
         this.setState({
-          links: links
+          links: board.links
         })
       })
   }
 
-  getLinks(): Link[] {
+  get links(): Link[] {
     return this.state.links
+  }
+  get id(): string {
+    return this.state.id;
   }
 
   deleteLink(link: Link) {
@@ -57,16 +63,30 @@ class BoardView extends React.Component<BoardViewProps, State> {
   }
 
   addLink(link: Link) {
-    return API.addLinkToBoard(this.props.board_id, link, "")
+    return API.addLinkToBoard(this.state.id, link, "")
       .then(response => {
         this.loadLinks();
       })
+  }
+
+  makeNewBoard() : Promise<void>{
+    var that = this;
+    return new Promise(function (resolve, reject) {
+      API.newBoard()
+        .then((response) => 
+          that.setState({
+            id: response.message,
+            links: []
+          }, resolve)
+        )
+    });
   }
 
   mapLinks(): JSX.Element[] {
     return this.state.links.map(
       link => (
         <SongCard
+          key={link.url}
           songlink={link}
         />
       )
@@ -79,10 +99,13 @@ class BoardView extends React.Component<BoardViewProps, State> {
         <div>
           <SectionHeader title="Board Name" />
         </div>
+        <div>
+          <BoardControl />
+        </div>
         <div className="songs-container">
           {this.mapLinks()}
         </div>
-        <AddSong onPlusClick={this.addLink}/>
+        <AddSong onPlusClick={this.addLink} />
       </div>
     )
   }
