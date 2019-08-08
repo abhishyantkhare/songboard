@@ -10,7 +10,8 @@ export type Link = {
   urlType: URLTYPE
 }
 
-export interface Board {
+export type Board = {
+  id: string,
   links:Link[]
 }
 

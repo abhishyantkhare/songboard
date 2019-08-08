@@ -6,6 +6,7 @@ import SongCard from './songcard'
 import { TextField } from '@material-ui/core';
 import AddSong from './add_song'
 import BoardControl from './board_control'
+import API from './__mocks__/api';
 
 
 
@@ -69,5 +70,28 @@ describe('<BoardView />' , () => {
     wrapper.instance().makeNewBoard();
     expect(wrapper.instance().links.length == 0).toBe(true);
   });
+  it('calls API for saving the board', () => {
+    const wrapper = shallow(<BoardView />);
+    const api_save_board_spy = jest.spyOn(API, 'saveBoard');
+    wrapper.instance().saveBoard().then(() => {
+      expect(api_save_board_spy).toHaveBeenCalled();
+    })
+  });
+  it('passes newBoard to BoardControl', () => {
+    const wrapper = shallow(<BoardView />);
+    const new_board_spy = jest.spyOn(wrapper.instance(), 'makeNewBoard');
+    const board_control = wrapper.find(BoardControl);
+    board_control.props().newBoardFunc().then(() => {
+      expect(new_board_spy).toHaveBeenCalled()
+    })
+  });
+  it('passes saveBoard to BoardControl', () => {
+    const wrapper = shallow(<BoardView />);
+    const save_board_spy = jest.spyOn(wrapper.instance(), 'saveBoard');
+    const board_control = wrapper.find(BoardControl);
+    board_control.props().saveBoardFunc().then(() => {
+      expect(save_board_spy).toHaveBeenCalled()
+    })
+  })
 
 })

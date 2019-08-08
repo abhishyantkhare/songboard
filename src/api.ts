@@ -3,6 +3,7 @@ import { Link, POSTResponse, Board , URLTYPE} from './types'
 
 var boards:Board[] = [
   {
+    id: "0",
     links: [
       {
         url: "https://open.spotify.com/embed/track/5JtPGzRgrWxkXX9LoROq3d",

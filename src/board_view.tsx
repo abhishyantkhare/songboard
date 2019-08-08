@@ -16,16 +16,12 @@ Contract
     * handles adding already validated links to the board 
 */
 
-type State = {
-  id: string,
-  links: Link[]
-}
 type BoardViewProps = {
 }
 
 
 
-class BoardView extends React.Component<BoardViewProps, State> {
+class BoardView extends React.Component<BoardViewProps, Board> {
   constructor(props: BoardViewProps) {
     super(props);
     this.state = {
@@ -82,7 +78,14 @@ class BoardView extends React.Component<BoardViewProps, State> {
     });
   }
   
-  saveBoard() : void{
+  saveBoard() : Promise<void>{
+    var that = this;
+    return new Promise(function (resolve, reject) {
+      API.saveBoard(that.state)
+      .then((response) => {
+        resolve();
+      })
+    })
 
   }
 

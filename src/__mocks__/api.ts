@@ -3,6 +3,7 @@ import { Link, POSTResponse, Board , URLTYPE} from '../types'
 
 var boards:Board[] = [
   {
+    id: "0",
     links: [
       {
         url: "https://open.spotify.com/embed/track/5JtPGzRgrWxkXX9LoROq3d",
@@ -36,7 +37,7 @@ class API {
   */
   static addLinkToBoard(board_id:string, link: Link, session_token: string): Promise<POSTResponse> {
     return new Promise(function(resolve, reject) {
-      let board = boards[parseInt(board_id)];
+      let board:Board = boards.find((b:Board) => b.id == board_id)!;
       board.links.push(link)
       let response:POSTResponse = {
         success: true,
@@ -63,6 +64,18 @@ class API {
       let response:POSTResponse = {
         success: true,
         message: id
+      };
+      resolve(response);
+    })
+  }
+
+  static saveBoard(board:Board): Promise<POSTResponse> {
+    return new Promise(function(resolve, reject) {
+      let board_ind= boards.findIndex((b:Board) => b.id == board.id)!;
+      boards[board_ind] = board;
+      let response:POSTResponse = {
+        success: true,
+        message: board.id
       };
       resolve(response);
     })
