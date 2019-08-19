@@ -1,9 +1,9 @@
-import React from 'react'
-import './songcard.css'
-import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutline';
-import IconButton from '@material-ui/core/IconButton';
-import SongFrame from './songframe'
-import {Link} from './types'
+import React from "react";
+import "./songcard.css";
+import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutline";
+import IconButton from "@material-ui/core/IconButton";
+import SongFrame from "./songframe";
+import { Link } from "./types";
 
 /*
 Contract
@@ -15,29 +15,39 @@ Contract
     * calls props delete fn on click of delete button 
 */
 
-type Props = {
-  songlink: Link 
-}
+type SongCardProps = {
+  songlink: Link;
+  deleteLink: (link: Link) => void;
+};
 
-class SongCard extends React.Component<Props, {}> {
+class SongCard extends React.Component<SongCardProps, {}> {
+  constructor(props: SongCardProps) {
+    super(props);
+    this.onDeleteClick = this.onDeleteClick.bind(this);
+  }
 
-  getLink():Link {
+  getLink(): Link {
     return this.props.songlink;
   }
 
+  onDeleteClick(e: React.MouseEvent<HTMLElement>) {
+    this.props.deleteLink(this.props.songlink);
+  }
+
   render() {
-    return(
+    return (
       <div className="song-container">
         <div className="songcard">
           <SongFrame songlink={this.props.songlink} />
         </div>
-        <IconButton aria-label="Delete" color="default">
-          <DeleteOutlinedIcon/>
-        </IconButton>
-    </div>
-    )
+        <div className="delete-button" onClick={this.onDeleteClick}>
+          <IconButton aria-label="Delete" color="default">
+            <DeleteOutlinedIcon />
+          </IconButton>
+        </div>
+      </div>
+    );
   }
-
 }
 
 export default SongCard;

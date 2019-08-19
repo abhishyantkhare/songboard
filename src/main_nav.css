@@ -1,0 +1,30 @@
+.App {
+  display: flex;
+  flex-direction: row;
+}
+
+.App-header {
+  margin-left: 5vw;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-container {
+  margin-top: 5vh;
+}
+
+.desc-container {
+  margin-top: 3vh;
+}
+
+
+.my-boards-container {
+  margin-top: 5vh;
+}
+
+.board-view {
+  display: flex;
+  flex-direction: column;
+  margin-left: 5vw;
+  margin-top: 8vh
+}
