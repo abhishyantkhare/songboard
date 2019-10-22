@@ -19,6 +19,11 @@ db.json
 .env.development.local
 .env.test.local
 .env.production.local
+.envrc
+.env.development
+.vscode
+
+
 
 npm-debug.log*
 yarn-debug.log*
